@@ -1,0 +1,27 @@
+spool
+get
+
+edit
+run
+
+https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/Format-Models.html#GUID-096CA64F-1DA3-4C49-A18B-ECC7518EE56C
+
+- format model is a character literal that converts strings to:
+	- numbers
+	- dates
+
+- number format
+	- positive numbers => leading space
+	- negative numbers => leading minus
+	- TO_CHAR, TO_NUMBER, TO_BINARY_FLOAT and TO_BINARY_DOUBLE
+	- elements: ", (G)", ". (D)", "B (lank)", "C (urrency)",   
+
+- string manipulation:
+	- INSTR(string, string, index_start, m_encounter) - returneaza pozitia unde a gasit
+	- SUBSTR(string, index_start, how_many)
+	- REPLACE(string, string_seach, string_replace)
+
+	- TRANSLATE(string, 'ab', 'ba')
+	- DECODE = C's switch
+
+- JOIN table ON (equality condition) / NATURAL JOIN (by default the equality is assured)
