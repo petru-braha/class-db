@@ -1,1 +1,17 @@
 Procedurile pot fi apelate numai din cadrul unui cod PL/SQL (funcţiile vor putea fi apelate şi dintr-o comandă de tip select spre exemplu)
+
+dml commands:
+- SELECT
+- INSERT
+- DELETE
+- UPDATE
+
+`;`
+- does not store the statement in the buffer
+- automatically runs the statement
+
+'\'
+- stores the statement in the buffer
+- does not flush the buffer
+- transactions
+- PL/SQL blocks
