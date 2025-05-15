@@ -1,0 +1,7 @@
+- cursoare implicite
+  - nu am acces direct la zona de memorie
+  - SQL%FOUND, SQL%NOTFOUND, SQL%ROWCOUNT
+- cursoare explicite
+  - declarare, deschidere, testare, preluare, inchidere
+  - testare == exista macar o linie?
+  - 
