@@ -1,3 +1,6 @@
-
-sqldeveloper/
-*.buf
+**/.vscode
+**/.idea
+**/sqldeveloper
+**/*.buf
+**/*.out
+**/*.exe
