@@ -1,3 +1,5 @@
+Procedurile pot fi apelate numai din cadrul unui cod PL/SQL (funcţiile vor putea fi apelate şi dintr-o comandă de tip select spre exemplu)
+
 Funcții pentru șiruri de caractere: ASCII, LENGTH, RPAD, CHR, LOWER, RTRIM, CONCAT, LPAD, SUBSTR, INITCAP, LTRIM, TRIM, INSTR, REPLACE, UPPER.
 
 Funcții pentru numere: ABS, EXP, ROUND, ACOS, LN, SIGN, ASIN, LOG, SIN, ATAN, MOD, TAN, COS, POWER, TRUNC.

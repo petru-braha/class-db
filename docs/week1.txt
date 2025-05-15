@@ -1,17 +1,35 @@
-Procedurile pot fi apelate numai din cadrul unui cod PL/SQL (funcţiile vor putea fi apelate şi dintr-o comandă de tip select spre exemplu)
+- ddl commands - for the database schema
+- dml commands - for views and tabels
+  - SELECT
+  - INSERT
+  - DELETE
+  - UPDATE
 
-dml commands:
-- SELECT
-- INSERT
-- DELETE
-- UPDATE
+- `;`
+  - does not store the statement in the buffer
+  - automatically runs the statement
 
-`;`
-- does not store the statement in the buffer
-- automatically runs the statement
+- '\'
+  - stores the statement in the buffer
+  - does not flush the buffer
+  - transactions
+  - PL/SQL blocks
 
-'\'
-- stores the statement in the buffer
-- does not flush the buffer
-- transactions
-- PL/SQL blocks
+- mysql dbms
+  - ++ users
+  - ++ schemas
+  - the play is with permissions
+
+- oracle dbms
+  - ++ users
+  - each user has one database
+  - a schma is OWNED by only one user
+
+  - instance = background processes
+  - one instance has only one database
+  - one instance has multiple accounts
+  - one account has only one database schema
+
+  - you can access and use objects in other schemas (with proper permissions), but ownership is per schema, and each schema belongs to one user.
+  - there’s no concept of a schema owning multiple users.
+  - you can think of a schema as a namespace or container for objects owned by a single user.

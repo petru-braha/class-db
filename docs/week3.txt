@@ -4,4 +4,3 @@
 - cursoare explicite
   - declarare, deschidere, testare, preluare, inchidere
   - testare == exista macar o linie?
-  - 
