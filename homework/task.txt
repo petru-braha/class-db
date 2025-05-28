@@ -1,0 +1,12 @@
+Sa se faca un script PLSQL care sa exporte toate tipurile de entitati studiate: tabele (cu constrangerile aferente), indecsi, proceduri, functii, tipuri, pachete, obiecte, secvente, triggere (in principiu cam tot ce puteti vedea in partea stanga a SQL Developer). Daca nu aveti in baza de date ceva anume, creati si apoi exportati.
+
+Fisierul rezultat va fi unul de tip SQL care va avea rolul de a crea din nou toate structurile utilizatorului student daca este rulat pe un alt cont nou-noutz (de exemplu STD).
+Nu folositi comanda execute immediate nicaieri in codul vostru PLSQL.
+
+Tema va fi trimisa si in formularul binecunoscut de la testarile din laborator pentru verificarea antiplagiat.
+
+Pentru tema nu aveti voie nici sa folositi pachetul DBMS_METADATA.
+
+- synonyms
+- public synonyms
+- other users

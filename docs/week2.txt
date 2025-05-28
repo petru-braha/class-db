@@ -1,13 +1,25 @@
-Procedurile pot fi apelate numai din cadrul unui cod PL/SQL (funcţiile vor putea fi apelate şi dintr-o comandă de tip select spre exemplu)
+- mysql dbms
+  - ++ users
+  - ++ schemas
+  - the play is with permissions
 
-Funcții pentru șiruri de caractere: ASCII, LENGTH, RPAD, CHR, LOWER, RTRIM, CONCAT, LPAD, SUBSTR, INITCAP, LTRIM, TRIM, INSTR, REPLACE, UPPER.
+- oracle dbms
+  - ++ users
+  - each user has one database
+  - a schma is OWNED by only one user
 
-Funcții pentru numere: ABS, EXP, ROUND, ACOS, LN, SIGN, ASIN, LOG, SIN, ATAN, MOD, TAN, COS, POWER, TRUNC.
+  - instance = background processes
+  - one instance has only one database
+  - one instance has multiple accounts
+  - one account has only one database schema
 
-Funcții pentru variabile de tip DATE: ADD_MONTHS, MONTHS_BETWEEN, CURRENT_DATE, ROUND, CURRENT_TIMESTAMP, SYSDATE, LAST_DAY, TRUNC.
+  - you can access and use objects in other schemas (with proper permissions), but ownership is per schema, and each schema belongs to one user.
+  - there’s no concept of a schema owning multiple users.
+  - you can think of a schema as a namespace or container for objects owned by a single user.
 
-Se face automat conversia între varchar2 și toate celelalte tipuri de date, de la o variabilă de tip DATE, NUMBER sau PLS_INTEGER la LONG (dar nu și invers: LONG este mai mare, poate ține minte numere mai mari care s-ar pierde dacă ar fi convertite în NUMBER, spre exemplu). De la NUMBER la PLS_INTEGER și invers. DATE nu poate fi convertit automat în NUMBER sau PLS_INTEGER.
+- sys and system are users
+- sysdba and sysopr are roles
+- sysdba = EVERYTHING
+- sysopr = start or shutdown of the database
 
-Conversiile explicite de date se realizează cu următoarele funcții: TO_NUMBER(), ROWIDTONCHAR(), TO_CHAR(), HEXTORAW(), TO_CLOB(), RAWTOHEX(), CHARTOROWID(), RAWTONHEX(), ROWIDTOCHAR(), TO_DATE().
-
-rownum trebuie in subquery doar atunci cand am nevoie de sortare: pentru ca ORDER BY se executa dupa WHERE
+- tables: dba_users, dba_tables;

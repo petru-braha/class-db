@@ -15,21 +15,6 @@
   - transactions
   - PL/SQL blocks
 
-- mysql dbms
-  - ++ users
-  - ++ schemas
-  - the play is with permissions
-
-- oracle dbms
-  - ++ users
-  - each user has one database
-  - a schma is OWNED by only one user
-
-  - instance = background processes
-  - one instance has only one database
-  - one instance has multiple accounts
-  - one account has only one database schema
-
-  - you can access and use objects in other schemas (with proper permissions), but ownership is per schema, and each schema belongs to one user.
-  - there’s no concept of a schema owning multiple users.
-  - you can think of a schema as a namespace or container for objects owned by a single user.
+- sqlplus /nolog
+- connect sys as sysdba
+- connect STUDENT/STUDENT

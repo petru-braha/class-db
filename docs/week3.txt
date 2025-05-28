@@ -1,3 +1,17 @@
+Procedurile pot fi apelate numai din cadrul unui cod PL/SQL (funcţiile vor putea fi apelate şi dintr-o comandă de tip select spre exemplu)
+
+Funcții pentru șiruri de caractere: ASCII, LENGTH, RPAD, CHR, LOWER, RTRIM, CONCAT, LPAD, SUBSTR, INITCAP, LTRIM, TRIM, INSTR, REPLACE, UPPER.
+
+Funcții pentru numere: ABS, EXP, ROUND, ACOS, LN, SIGN, ASIN, LOG, SIN, ATAN, MOD, TAN, COS, POWER, TRUNC.
+
+Funcții pentru variabile de tip DATE: ADD_MONTHS, MONTHS_BETWEEN, CURRENT_DATE, ROUND, CURRENT_TIMESTAMP, SYSDATE, LAST_DAY, TRUNC.
+
+Se face automat conversia între varchar2 și toate celelalte tipuri de date, de la o variabilă de tip DATE, NUMBER sau PLS_INTEGER la LONG (dar nu și invers: LONG este mai mare, poate ține minte numere mai mari care s-ar pierde dacă ar fi convertite în NUMBER, spre exemplu). De la NUMBER la PLS_INTEGER și invers. DATE nu poate fi convertit automat în NUMBER sau PLS_INTEGER.
+
+Conversiile explicite de date se realizează cu următoarele funcții: TO_NUMBER(), ROWIDTONCHAR(), TO_CHAR(), HEXTORAW(), TO_CLOB(), RAWTOHEX(), CHARTOROWID(), RAWTONHEX(), ROWIDTOCHAR(), TO_DATE().
+
+rownum trebuie in subquery doar atunci cand am nevoie de sortare: pentru ca ORDER BY se executa dupa WHERE
+
 - cursoare implicite
   - nu am acces direct la zona de memorie
   - SQL%FOUND, SQL%NOTFOUND, SQL%ROWCOUNT
