@@ -5,7 +5,7 @@
 
 - oracle dbms
   - ++ users
-  - each user has one database
+  - each user has one schma
   - a schma is OWNED by only one user
 
   - instance = background processes
