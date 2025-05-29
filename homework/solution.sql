@@ -5,7 +5,7 @@ DECLARE
    v_table_ddl VARCHAR2(4000);
    v_index_ddl VARCHAR2(4000);
    v_prev_line VARCHAR2(4000);
-  
+
   -- cursors
    CURSOR c_tables IS
    SELECT table_name
@@ -434,6 +434,197 @@ BEGIN
          );
          v_prev_line := s.name || s.type;
       END IF;
+   END LOOP;
+
+
+--! data
+   UTL_FILE.PUT_LINE(
+      v_file,
+      '--! data'
+   );
+   FOR tab_data IN (
+      SELECT table_name
+        FROM user_tables
+       ORDER BY table_name
+   ) LOOP
+      DECLARE
+         v_count         NUMBER;
+         v_columns       VARCHAR2(4000);
+         v_insert_base   VARCHAR2(4000);
+         v_cursor_sql    VARCHAR2(4000);
+         v_cursor_id     NUMBER;
+         v_col_count     NUMBER;
+         v_desc_tab      DBMS_SQL.DESC_TAB;
+         v_col_value     VARCHAR2(4000);
+         v_date_value    DATE;
+         v_number_value  NUMBER;
+         v_insert_values VARCHAR2(32767);
+         v_ret           NUMBER;
+      BEGIN
+         EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM ' || tab_data.table_name
+           INTO v_count;
+         IF v_count > 0 THEN
+            SELECT
+               LISTAGG(LOWER(column_name),
+                       ', ') WITHIN GROUP(
+                ORDER BY column_id),
+               COUNT(*)
+              INTO
+               v_columns,
+               v_col_count
+              FROM user_tab_columns
+             WHERE table_name = tab_data.table_name;
+
+            v_insert_base := 'INSERT INTO '
+                             || LOWER(tab_data.table_name)
+                             || ' ('
+                             || v_columns
+                             || ') VALUES ';
+        
+        -- SELECT
+            v_cursor_sql := 'SELECT * FROM ' || tab_data.table_name;
+            v_cursor_id := DBMS_SQL.OPEN_CURSOR;
+            DBMS_SQL.PARSE(
+               v_cursor_id,
+               v_cursor_sql,
+               DBMS_SQL.NATIVE
+            );
+            DBMS_SQL.DESCRIBE_COLUMNS(
+               v_cursor_id,
+               v_col_count,
+               v_desc_tab
+            );
+            FOR i IN 1..v_col_count LOOP
+               IF v_desc_tab(i).col_type = 1 THEN -- VARCHAR2/CHAR
+                  DBMS_SQL.DEFINE_COLUMN(
+                     v_cursor_id,
+                     i,
+                     v_col_value,
+                     4000
+                  );
+               ELSIF v_desc_tab(i).col_type = 2 THEN -- NUMBER
+                  DBMS_SQL.DEFINE_COLUMN(
+                     v_cursor_id,
+                     i,
+                     v_number_value
+                  );
+               ELSIF v_desc_tab(i).col_type = 12 THEN -- DATE
+                  DBMS_SQL.DEFINE_COLUMN(
+                     v_cursor_id,
+                     i,
+                     v_date_value
+                  );
+               ELSE
+                  DBMS_SQL.DEFINE_COLUMN(
+                     v_cursor_id,
+                     i,
+                     v_col_value,
+                     4000
+                  );
+               END IF;
+            END LOOP;
+
+            v_ret := DBMS_SQL.EXECUTE(v_cursor_id);
+            WHILE DBMS_SQL.FETCH_ROWS(v_cursor_id) > 0 LOOP
+               v_insert_values := '(';
+               FOR i IN 1..v_col_count LOOP
+                  IF i > 1 THEN
+                     v_insert_values := v_insert_values || ', ';
+                  END IF;
+                  IF v_desc_tab(i).col_type = 1 THEN
+                     DBMS_SQL.COLUMN_VALUE(
+                        v_cursor_id,
+                        i,
+                        v_col_value
+                     );
+                     IF v_col_value IS NULL THEN
+                        v_insert_values := v_insert_values || 'NULL';
+                     ELSE
+                        v_insert_values := v_insert_values
+                                           || ''''
+                                           || REPLACE(
+                           v_col_value,
+                           '''',
+                           ''''''
+                        )
+                                           || '''';
+                     END IF;
+                  ELSIF v_desc_tab(i).col_type = 2 THEN
+                     DBMS_SQL.COLUMN_VALUE(
+                        v_cursor_id,
+                        i,
+                        v_number_value
+                     );
+                     IF v_number_value IS NULL THEN
+                        v_insert_values := v_insert_values || 'NULL';
+                     ELSE
+                        v_insert_values := v_insert_values || TO_CHAR(v_number_value);
+                     END IF;
+                  ELSIF v_desc_tab(i).col_type = 12 THEN
+                     DBMS_SQL.COLUMN_VALUE(
+                        v_cursor_id,
+                        i,
+                        v_date_value
+                     );
+                     IF v_date_value IS NULL THEN
+                        v_insert_values := v_insert_values || 'NULL';
+                     ELSE
+                        v_insert_values := v_insert_values
+                                           || 'TO_DATE('''
+                                           || TO_CHAR(
+                           v_date_value,
+                           'DD-MON-YYYY HH24:MI:SS'
+                        )
+                                           || ''', ''DD-MON-YYYY HH24:MI:SS'')';
+                     END IF;
+                  ELSE
+                     DBMS_SQL.COLUMN_VALUE(
+                        v_cursor_id,
+                        i,
+                        v_col_value
+                     );
+                     IF v_col_value IS NULL THEN
+                        v_insert_values := v_insert_values || 'NULL';
+                     ELSE
+                        v_insert_values := v_insert_values
+                                           || ''''
+                                           || REPLACE(
+                           v_col_value,
+                           '''',
+                           ''''''
+                        )
+                                           || '''';
+                     END IF;
+                  END IF;
+               END LOOP;
+
+               v_insert_values := v_insert_values || ');';
+          
+          -- INSERT 
+               UTL_FILE.PUT_LINE(
+                  v_file,
+                  v_insert_base || v_insert_values
+               );
+            END LOOP;
+
+            DBMS_SQL.CLOSE_CURSOR(v_cursor_id);
+            UTL_FILE.PUT_LINE(
+               v_file,
+               '/'
+            );
+            UTL_FILE.PUT_LINE(
+               v_file,
+               ''
+            );
+         END IF;
+
+      EXCEPTION
+         WHEN OTHERS THEN
+            IF DBMS_SQL.IS_OPEN(v_cursor_id) THEN
+               DBMS_SQL.CLOSE_CURSOR(v_cursor_id);
+            END IF;
+            NULL;
+      END;
    END LOOP;
 
 --! end
