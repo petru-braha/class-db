@@ -1,0 +1,17 @@
+- trigger
+  - pentru restrictionari, statistici, etc
+  - tipuri
+    - dml
+    - ddl
+    - sys
+
+- dml
+  - before, after, instead of
+  - :OLD, :NEW objects
+
+- ddl
+  - modifica schem
+  - instead of create
+
+- sys
+  - AFTER LOGON ON DATABASE

@@ -1,3 +1,4 @@
+--CREATE OR REPLACE DIRECTORY MYDIR AS 'A:\uni\class-db\junk\UTL';
 DECLARE
    v_fisier UTL_FILE.FILE_TYPE;
 BEGIN

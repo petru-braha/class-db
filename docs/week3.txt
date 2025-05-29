@@ -1,4 +1,16 @@
-Procedurile pot fi apelate numai din cadrul unui cod PL/SQL (funcţiile vor putea fi apelate şi dintr-o comandă de tip select spre exemplu)
+- procedurile 
+  - pot fi apelate
+    - din cadrul unui cod PL/SQL
+    - din alta aplicatie de tip php, java, etc
+    - NU din interogari
+  - returneaza 0 sau mai multe valori
+
+- functii 
+  - pot fi apelate
+    - din cadrul unui cod PL/SQL
+    - din alta aplicatie de tip php, java, etc
+    - din interogari
+  - returneaza doar o valoare valori
 
 Funcții pentru șiruri de caractere: ASCII, LENGTH, RPAD, CHR, LOWER, RTRIM, CONCAT, LPAD, SUBSTR, INITCAP, LTRIM, TRIM, INSTR, REPLACE, UPPER.
 

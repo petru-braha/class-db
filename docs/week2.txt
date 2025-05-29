@@ -22,4 +22,4 @@
 - sysdba = EVERYTHING
 - sysopr = start or shutdown of the database
 
-- tables: dba_users, dba_tables;
+- tables: dba_users, dba_tables, user_source, user_objects, user_procedures;
