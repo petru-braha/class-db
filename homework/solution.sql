@@ -129,7 +129,7 @@ BEGIN
                         || ' '
                         || c.data_type;
       
-      -- size for VARCHAR2
+      -- VARCHAR2
          IF c.data_type IN ( 'VARCHAR2',
                              'CHAR' ) THEN
             v_table_ddl := v_table_ddl
@@ -138,7 +138,7 @@ BEGIN
                            || ')';
          END IF;
       
-      -- Add precision and scale for NUMBER
+      -- NUMBER
          IF
             c.data_type = 'NUMBER'
             AND c.data_precision IS NOT NULL
@@ -194,7 +194,7 @@ BEGIN
     
     -- constraints
       FOR c IN c_constraints(t.table_name) LOOP
-         IF c.constraint_type = 'P' THEN  -- Primary Key
+         IF c.constraint_type = 'P' THEN
             UTL_FILE.PUT_LINE(
                v_file,
                'ALTER TABLE '
@@ -205,7 +205,7 @@ BEGIN
                || c.column_name
                || ');'
             );
-         ELSIF c.constraint_type = 'R' THEN  -- Foreign Key
+         ELSIF c.constraint_type = 'R' THEN
             UTL_FILE.PUT_LINE(
                v_file,
                'ALTER TABLE '
@@ -220,7 +220,7 @@ BEGIN
                || c.delete_rule
                || ';'
             );
-         ELSIF c.constraint_type = 'U' THEN  -- Unique
+         ELSIF c.constraint_type = 'U' THEN
             UTL_FILE.PUT_LINE(
                v_file,
                'ALTER TABLE '
