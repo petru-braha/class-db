@@ -1,11 +1,10 @@
    SET SERVEROUTPUT ON;
 
 DECLARE
-   v_file        UTL_FILE.FILE_TYPE;
-   v_table_ddl   VARCHAR2(4000);
-   v_index_ddl   VARCHAR2(4000);
-   v_source_line VARCHAR2(4000);
-   v_prev_line   VARCHAR2(4000);
+   v_file      UTL_FILE.FILE_TYPE;
+   v_table_ddl VARCHAR2(4000);
+   v_index_ddl VARCHAR2(4000);
+   v_prev_line VARCHAR2(4000);
   
   -- cursors
    CURSOR c_tables IS
