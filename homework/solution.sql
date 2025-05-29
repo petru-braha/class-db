@@ -1,15 +1,11 @@
    SET SERVEROUTPUT ON;
 
 DECLARE
-   v_file           UTL_FILE.FILE_TYPE;
-   v_table_ddl      CLOB;
-   v_constraint_ddl CLOB;
-   v_index_ddl      CLOB;
-   v_sequence_ddl   CLOB;
-   v_trigger_ddl    CLOB;
-   v_source_line    VARCHAR2(4000);
-   v_prev_line      VARCHAR2(4000);
-   v_view_text      CLOB;
+   v_file        UTL_FILE.FILE_TYPE;
+   v_table_ddl   VARCHAR2(4000);
+   v_index_ddl   VARCHAR2(4000);
+   v_source_line VARCHAR2(4000);
+   v_prev_line   VARCHAR2(4000);
   
   -- cursors
    CURSOR c_tables IS
