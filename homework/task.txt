@@ -7,6 +7,19 @@ Tema va fi trimisa si in formularul binecunoscut de la testarile din laborator p
 
 Pentru tema nu aveti voie nici sa folositi pachetul DBMS_METADATA.
 
-- synonyms
-- public synonyms
-- other users
+CREATE OR REPLACE DIRECTORY MYDIR AS 'A:\uni\class-db\homework';
+
+Tables
+- DROP ANY EXISTING
+- CREATE TABLE
+- COLUMNS
+- CONSTRAINTS
+
+Views
+Indexes (through constraints)
+Sequences
+Triggers
+Procedures
+Functions
+Objects (Types)
+Packages
